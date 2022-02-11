@@ -538,7 +538,7 @@ public void edgeDetection_toptobot(int edgeDist)
    */
   public static void main(String[] args) 
   {
-    Picture blank = new Picture("C:\\Users\\Andy C\\Downloads\\0262022\\pixLab\\pixLab\\images\\swan.jpg");
+    Picture blank = new Picture("C:/Users/14435/Documents/GitHub/COCKREPOSITORY/src/images");
     blank.edgeDetection_toptobot(20);
     blank.explore();
   }

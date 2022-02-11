@@ -80,10 +80,10 @@ public class PictureTester
   public static void testEdgeDetection2()
     {
       Picture beach = new Picture("swan.jpg");
-      beach.edgeDetection2();
+      beach.edgeDetection2(10, 10);
       beach.explore();
     }
-  )
+  
   
   /** Main method for testing.  Every class can have a main
     * method in Java */
