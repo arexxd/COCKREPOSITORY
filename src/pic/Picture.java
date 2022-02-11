@@ -458,28 +458,79 @@ public void edgeDetection_toptobot(int edgeDist)
     
     
   }
-  public void edgeDetectionTwo(int edgeDist)
+  public void edgeDetection2(int edgeDist, int length)
   {
     Pixel leftPixel = null;
     Pixel rightPixel = null;
     Pixel[][] pixels = this.getPixels2D();
+    int[][] newPixels = new int[pixels.length][pixels[0].length];
     Color rightColor = null;
     for (int row = 0; row < pixels.length; row++)
     {
-      for (int col = 0; 
-           col < pixels[0].length-1; col++)
+      for (int col = length; 
+           col < pixels[0].length-length-1; col++)
       {
-        leftPixel = pixels[row][col];
-        rightPixel = pixels[row][col+1];
-        rightColor = rightPixel.getColor();
-        if (leftPixel.colorDistance(rightColor) > 
-            edgeDist)
-          leftPixel.setColor(Color.BLACK);
+        int count = 0;
+        int value = 0;
+        for(int i = -length; i<length+1; i++)
+        {
+          count++;
+          value += pixels[row][col+i].getAverage();
+        }
+        int avg = value/count;
+        
+        for(int i = -length; i<length; i++)
+        {
+          leftPixel = pixels[row][col+i];
+          rightPixel = pixels[row][col+i+1];
+          rightColor = rightPixel.getColor();
+          if (leftPixel.colorDistance(rightColor) > edgeDist && ((leftPixel.getAverage()<avg && rightPixel.getAverage()>avg) || (leftPixel.getAverage()>avg && rightPixel.getAverage()<avg)))
+            newPixels[row][col+i] = 1;
+          else
+            newPixels[row][col+i] = 0;
+        }
+      }
+    }
+    
+     for (int row = length; row < pixels.length-length-1; row++)
+    {
+      for (int col = 0; 
+           col < pixels[0].length; col++)
+      {
+        int count = 0;
+        int value = 0;
+        for(int i = -length; i<length+1; i++)
+        {
+          count++;
+          value += pixels[row+i][col].getAverage();
+        }
+        int avg = value/count;
+        
+        for(int i = -length; i<length; i++)
+        {
+          leftPixel = pixels[row+i][col];
+          rightPixel = pixels[row+i+1][col];
+          rightColor = rightPixel.getColor();
+          if (leftPixel.colorDistance(rightColor) > edgeDist && ((leftPixel.getAverage()<avg && rightPixel.getAverage()>avg) || (leftPixel.getAverage()>avg && rightPixel.getAverage()<avg)))
+            newPixels[row+i][col] = 1;
+          else
+            newPixels[row+i][col] = 0;
+        }
+      }
+    }
+    
+    for (int col = 0; col < pixels[0].length; col++)
+    {
+      for (int row = 0; row < pixels.length; row++)
+      {
+        if(newPixels[row][col] == 1)
+          pixels[row][col].setColor(Color.BLACK);
         else
-          leftPixel.setColor(Color.WHITE);
+          pixels[row][col].setColor(Color.WHITE);
       }
     }
   }
+  
   
   
   /* Main method for testing - each class in Java can have a main 
