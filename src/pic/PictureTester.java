@@ -77,7 +77,13 @@ public class PictureTester
     beach.fixUnderwater();
     beach.explore();
   }
-  
+  public static void testEdgeDetection2(
+    {
+      Picture beach = new Picture("swan.jpg");
+      beach.edgeDetection2();
+      beach.explore();
+    }
+  )
   
   /** Main method for testing.  Every class can have a main
     * method in Java */
@@ -108,5 +114,6 @@ public class PictureTester
     //testSetRedToHalfValueInTopHalf();
     //testClearBlueOverValue(200);
     //testGetAverageForColumn(0);
+    testEdgeDetection2();
   }
 }
