@@ -77,7 +77,7 @@ public class PictureTester
     beach.fixUnderwater();
     beach.explore();
   }
-  public static void testEdgeDetection2(
+  public static void testEdgeDetection2()
     {
       Picture beach = new Picture("swan.jpg");
       beach.edgeDetection2();
