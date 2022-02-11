@@ -544,3 +544,4 @@ public void edgeDetection_toptobot(int edgeDist)
   }
   
 } // this } is the end of class Picture, put all new methods before this
+//cock
